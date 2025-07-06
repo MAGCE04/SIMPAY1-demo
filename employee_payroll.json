@@ -1,0 +1,378 @@
+{
+  "version": "0.1.0",
+  "name": "employee_payroll",
+  "instructions": [
+    {
+      "name": "initializeEmployer",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "employer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "registerEmployee",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "employee",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "position",
+          "type": "string"
+        },
+        {
+          "name": "hourlyRate",
+          "type": "u64"
+        },
+        {
+          "name": "employeeWallet",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "updateEmployee",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "employee",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "position",
+          "type": "string"
+        },
+        {
+          "name": "hourlyRate",
+          "type": "u64"
+        },
+        {
+          "name": "isActive",
+          "type": "bool"
+        },
+        {
+          "name": "employeeWallet",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "checkIn",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "employee",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "workSession",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "employeeWallet",
+          "type": "publicKey"
+        },
+        {
+          "name": "sessionId",
+          "type": "u64"
+        },
+        {
+          "name": "timestamp",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "checkOut",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "employee",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "workSession",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "employeeWallet",
+          "type": "publicKey"
+        },
+        {
+          "name": "sessionId",
+          "type": "u64"
+        },
+        {
+          "name": "timestamp",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "createPayrollBatch",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "payrollBatch",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "batchId",
+          "type": "u64"
+        },
+        {
+          "name": "timestamp",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "processPayroll",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "payrollBatch",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "employee",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "workSession",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "batchId",
+          "type": "u64"
+        },
+        {
+          "name": "timestamp",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "markSessionPaid",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "workSession",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "employeeWallet",
+          "type": "publicKey"
+        },
+        {
+          "name": "sessionId",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Employee",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "position",
+            "type": "string"
+          },
+          {
+            "name": "hourlyRate",
+            "type": "u64"
+          },
+          {
+            "name": "totalHoursWorked",
+            "type": "u64"
+          },
+          {
+            "name": "totalPaid",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "employeeWallet",
+            "type": "publicKey"
+          },
+          {
+            "name": "isActive",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WorkSession",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "employee",
+            "type": "publicKey"
+          },
+          {
+            "name": "checkInTime",
+            "type": "i64"
+          },
+          {
+            "name": "checkOutTime",
+            "type": "i64"
+          },
+          {
+            "name": "duration",
+            "type": "u64"
+          },
+          {
+            "name": "isPaid",
+            "type": "bool"
+          },
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "sessionId",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PayrollBatch",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "batchId",
+            "type": "u64"
+          },
+          {
+            "name": "totalAmount",
+            "type": "u64"
+          },
+          {
+            "name": "createdAt",
+            "type": "i64"
+          },
+          {
+            "name": "processedAt",
+            "type": "i64"
+          },
+          {
+            "name": "isProcessed",
+            "type": "bool"
+          },
+          {
+            "name": "authority",
+            "type": "publicKey"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "address": "CJL2foUtZDC8vE9MF3Tb2BeJrfDZsVCkZD2pkdPV9b4X"
+  }
+}
