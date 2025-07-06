@@ -1,0 +1,170 @@
+.employee-dashboard {
+  padding: 1rem;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+}
+
+.employee-info {
+  margin-top: 0.5rem;
+}
+
+.employee-info h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.employee-info p {
+  margin: 0.25rem 0 0;
+  color: var(--text-light);
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .dashboard-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.check-in-out-card {
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.time-display {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.current-time {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.current-date {
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-top: 0.25rem;
+}
+
+.checked-in-status, .checked-out-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.status-indicator {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: var(--border-color);
+  margin-bottom: 0.5rem;
+}
+
+.status-indicator.active {
+  background-color: var(--secondary-color);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+.check-in-time {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+.check-button {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.check-in {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.check-in:hover {
+  background-color: var(--secondary-hover);
+}
+
+.check-out {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.check-out:hover {
+  background-color: var(--danger-hover);
+}
+
+.dashboard-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.summary-card {
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.summary-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.quick-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quick-link {
+  display: block;
+  padding: 1rem;
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.quick-link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  color: var(--primary-color);
+}
